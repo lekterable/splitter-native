@@ -15,15 +15,14 @@ export default class extends Component {
     password: ''
   }
 
-  onSignIn = token =>
-    handleSignIn(token).then(() => this.props.navigation.navigate('InitScreen'))
+  onSignIn = token => handleSignIn(token)
 
   render() {
     const { email, password } = this.state
     return (
       <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
         <Mutation mutation={LOGIN_USER_QUERY}>
-          {login => (
+          {(login, { client }) => (
             <View
               style={{
                 alignItems: 'center',
@@ -68,7 +67,9 @@ export default class extends Component {
                   const { data } = await login({
                     variables: { email, password }
                   })
-                  this.onSignIn(data.login)
+                  await this.onSignIn(data.login)
+                  await client.resetStore()
+                  this.props.navigation.navigate('InitScreen')
                 }}
               />
               <Button

@@ -2,7 +2,8 @@ import { AsyncStorage } from 'react-native'
 
 export const AUTH_KEY = 'auth-token'
 
-export const handleSignIn = token => AsyncStorage.setItem(AUTH_KEY, token)
+export const handleSignIn = async token =>
+  await AsyncStorage.setItem(AUTH_KEY, token)
 
 export const handleSignUp = () => AsyncStorage.setItem(AUTH_KEY, 'true')
 
