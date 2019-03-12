@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import React from 'react'
 import { Query } from 'react-apollo'
-import { Text, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 
 const GET_HOUSEHOLD_QUERY = gql`
   query Household($id: String!) {
@@ -14,6 +14,11 @@ const GET_HOUSEHOLD_QUERY = gql`
       name
       expenses {
         id
+        cost
+        type
+        householder {
+          name
+        }
       }
       householders {
         id
@@ -35,7 +40,19 @@ export default ({ navigation }) => (
 
         return (
           <View style={{ marginTop: 100 }}>
-            <Text>{household.owner.name}</Text>
+            <Text>Owner: {household.owner.name}</Text>
+            <View>
+              <Text>Expenses: </Text>
+              <FlatList
+                data={household.expenses}
+                renderItem={({ item: { id, type, cost, householder } }) => (
+                  <Text key={id}>{`${
+                    householder.name
+                  } spent ${cost} on ${type}`}</Text>
+                )}
+                keyExtractor={({ id }) => id}
+              />
+            </View>
           </View>
         )
       }}
