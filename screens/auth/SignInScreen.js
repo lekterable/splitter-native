@@ -1,8 +1,8 @@
-import gql from 'graphql-tag'
-import React, { Component } from 'react'
-import { Mutation } from 'react-apollo'
-import { Button, TextInput, View } from 'react-native'
-import { handleSignIn } from '../../utils/auth'
+import gql from 'graphql-tag';
+import React, { Component } from 'react';
+import { Mutation } from 'react-apollo';
+import { Button, TextInput, View } from 'react-native';
+import auth from '../../utils/auth';
 
 const LOGIN_USER_QUERY = gql`
   mutation Login($email: String!, $password: String!) {
@@ -14,8 +14,6 @@ export default class extends Component {
     email: '',
     password: ''
   }
-
-  onSignIn = token => handleSignIn(token)
 
   render() {
     const { email, password } = this.state
@@ -67,7 +65,7 @@ export default class extends Component {
                   const { data } = await login({
                     variables: { email, password }
                   })
-                  await this.onSignIn(data.login)
+                  await auth.authenticate(data.login)
                   await client.resetStore()
                   this.props.navigation.navigate('InitScreen')
                 }}

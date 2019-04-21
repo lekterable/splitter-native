@@ -4,14 +4,13 @@ import { setContext } from 'apollo-link-context'
 import { HttpLink } from 'apollo-link-http'
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
-import { AsyncStorage } from 'react-native'
 import Root from './screens'
-import { AUTH_KEY } from './utils/auth'
+import auth from './utils/auth'
 
 const httpLink = new HttpLink({ uri: 'http://localhost:4000/' })
 
 const authLink = setContext(async (_, { headers }) => {
-  const token = await AsyncStorage.getItem(AUTH_KEY)
+  const token = await auth.token()
   return {
     headers: {
       ...headers,

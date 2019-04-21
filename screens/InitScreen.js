@@ -1,11 +1,13 @@
 import React from 'react'
 import { ActivityIndicator, View } from 'react-native'
-import { isSignedIn } from '../utils/auth'
+import auth from '../utils/auth'
 
 export default ({ navigation }) => {
-  isSignedIn().then(signedIn =>
-    signedIn ? navigation.navigate('App') : navigation.navigate('Auth')
-  )
+  auth
+    .isAuthenticated()
+    .then(isAuthenticated =>
+      isAuthenticated ? navigation.navigate('App') : navigation.navigate('Auth')
+    )
 
   return (
     <View

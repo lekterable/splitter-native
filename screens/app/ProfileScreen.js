@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import React from 'react'
 import { Query } from 'react-apollo'
 import { Button, Text, View } from 'react-native'
-import { handleSignOut } from '../../utils/auth'
+import auth from '../../utils/auth'
 
 const ME_QUERY = gql`
   {
@@ -15,8 +15,10 @@ const ME_QUERY = gql`
 `
 
 export default ({ navigation }) => {
-  const onSignOut = () =>
-    handleSignOut().then(() => navigation.navigate('InitScreen'))
+  const onSignOut = async () => {
+    await auth.clear()
+    navigation.navigate('InitScreen')
+  }
 
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>

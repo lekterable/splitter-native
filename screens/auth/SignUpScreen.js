@@ -1,10 +1,12 @@
 import React from 'react'
 import { Button, Text, View } from 'react-native'
-import { handleSignUp } from '../../utils/auth'
+import auth from '../../utils/auth'
 
 export default ({ navigation }) => {
-  const onSignUp = () =>
-    handleSignUp().then(() => navigation.navigate('InitScreen'))
+  const onSignUp = async () => {
+    await auth.authenticate('token')
+    navigation.navigate('InitScreen')
+  }
 
   return (
     <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
