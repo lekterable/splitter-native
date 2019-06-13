@@ -12,6 +12,7 @@
     "apollo-link-context": "^1.0.14",
     "apollo-link-http": "^1.5.11",
     "expo": "^33.0.0",
+    "formik": "^1.5.7",
     "graphql": "^14.1.1",
     "graphql-tag": "^2.10.1",
     "react": "16.8.3",
