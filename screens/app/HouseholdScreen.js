@@ -50,7 +50,7 @@ export default ({ navigation }) => {
   const [selectedExpense, setSelectedExpense] = useState(null)
 
   return (
-    <View style={{ alignItems: 'center', flex: 1 }}>
+    <View style={{ alignItems: 'center', flex: 1, marginBottom: 50 }}>
       <Query
         query={GET_HOUSEHOLD_QUERY}
         variables={{ id: navigation.getParam('id') }}
@@ -99,6 +99,7 @@ export default ({ navigation }) => {
                   }}
                 </Query>
               </Modal>
+
               <Text>Owner: {household.owner.name}</Text>
               <View>
                 <Text>Expenses: </Text>
@@ -111,6 +112,7 @@ export default ({ navigation }) => {
                   )}
                   keyExtractor={({ id }) => id}
                 />
+                <Button color="#4CB944" title="Add Expense" />
               </View>
             </View>
           )

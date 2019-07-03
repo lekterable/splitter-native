@@ -1,9 +1,9 @@
-import { Formik } from 'formik';
-import gql from 'graphql-tag';
-import React from 'react';
-import { Mutation } from 'react-apollo';
-import { Button, TextInput, View } from 'react-native';
-import auth from '../../utils/auth';
+import { Formik } from 'formik'
+import gql from 'graphql-tag'
+import React from 'react'
+import { Mutation } from 'react-apollo'
+import { Button, TextInput, View } from 'react-native'
+import auth from '../../utils/auth'
 
 const REGISTER_USER_QUERY = gql`
   mutation Register($name: String!, $email: String!, $password: String!) {
@@ -86,10 +86,15 @@ export default ({ navigation }) => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                 />
-                <Button title="Sign Up" onPress={handleSubmit} />
+                <Button
+                  title="Sign Up"
+                  onPress={handleSubmit}
+                  color="#4CB944"
+                />
                 <Button
                   title="Sign In"
                   onPress={() => navigation.navigate('SignIn')}
+                  color="#4CB944"
                 />
               </View>
             )}

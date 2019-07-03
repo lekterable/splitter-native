@@ -70,10 +70,15 @@ export default ({ navigation }) => {
                   onBlur={handleBlur('password')}
                   value={values.password}
                 />
-                <Button title="Sign In" onPress={handleSubmit} />
+                <Button
+                  title="Sign In"
+                  onPress={handleSubmit}
+                  color="#4CB944"
+                />
                 <Button
                   title="Sign Up"
                   onPress={() => navigation.navigate('SignUp')}
+                  color="#4CB944"
                 />
               </View>
             )}

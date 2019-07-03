@@ -15,7 +15,8 @@ const HomeNavigator = createStackNavigator(
     Household: {
       screen: HouseholdScreen,
       navigationOptions: ({ navigation }) => ({
-        title: navigation.state.params.name
+        title: navigation.state.params.name,
+        headerTintColor: '#4CB944'
       })
     }
   },

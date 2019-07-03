@@ -30,7 +30,7 @@ export default ({ navigation }) => {
           return (
             <>
               <Text>Hi, {me.name}!</Text>
-              <Button title="Sign Out" onPress={onSignOut} />
+              <Button title="Sign Out" onPress={onSignOut} color="#4CB944" />
             </>
           )
         }}
