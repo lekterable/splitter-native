@@ -1,17 +1,17 @@
 import { createAppContainer, createSwitchNavigator } from 'react-navigation'
 import App from './app'
 import Auth from './auth'
-import InitScreen from './InitScreen'
+import Init from './init'
 
 export default createAppContainer(
   createSwitchNavigator(
     {
-      InitScreen,
+      Init,
       App,
       Auth
     },
     {
-      initialRouteName: 'InitScreen'
+      initialRouteName: 'Init'
     }
   )
 )

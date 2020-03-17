@@ -4,10 +4,10 @@ import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation'
-import HomeScreen from './HomeScreen'
-import HouseholdScreen from './HouseholdScreen'
-import OtherScreen from './OtherScreen'
-import ProfileScreen from './ProfileScreen'
+import HomeScreen from '../../components/Home'
+import HouseholdScreen from '../../components/Household'
+import OtherScreen from '../../components/Other'
+import ProfileScreen from '../../components/Profile'
 
 const HomeNavigator = createStackNavigator(
   {

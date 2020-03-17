@@ -1,7 +1,7 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 
-export default ({ households = [], onPress }) => (
+const HouseholdList = ({ households = [], onPress }) => (
   <View>
     <FlatList
       data={households}
@@ -23,3 +23,5 @@ export default ({ households = [], onPress }) => (
     />
   </View>
 )
+
+export default HouseholdList
