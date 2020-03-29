@@ -46,7 +46,9 @@ const Household = ({ navigation }) => {
     navigation.setParams({ name: data.household.name })
   }, [data])
 
+  const handleExpensePress = id => setSelectedExpenseId(String(id))
   const handleExpenseClose = () => setSelectedExpenseId(null)
+  const handleSharePress = () => setIsSharing(true)
   const handleShareClose = () => setIsSharing(false)
 
   if (loading) return <LoadingScreen />
@@ -56,13 +58,16 @@ const Household = ({ navigation }) => {
   return (
     <Styled.Container>
       <Styled.ShareIcon>
-        <TouchableOpacity onPress={() => setIsSharing(true)}>
+        <TouchableOpacity onPress={handleSharePress}>
           <Ionicons name="ios-link" size={40} />
         </TouchableOpacity>
       </Styled.ShareIcon>
       <Styled.Household>
         <Text>Owner: {household.owner.name}</Text>
-        <ExpenseList expenses={household.expenses} />
+        <ExpenseList
+          expenses={household.expenses}
+          onPress={handleExpensePress}
+        />
         <Button title="Add Expense" />
       </Styled.Household>
       <ShareModal
