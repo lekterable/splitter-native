@@ -1,8 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
-import { Button, FlatList, Text, TouchableOpacity, View } from 'react-native'
+import { Button, Text, TouchableOpacity } from 'react-native'
 import { ErrorScreen, LoadingScreen } from '../shared'
+import ExpenseList from './ExpenseList'
 import ExpenseModal from './ExpenseModal'
 import ShareModal from './ShareModal'
 import * as Styled from './styled'
@@ -61,20 +62,8 @@ const Household = ({ navigation }) => {
       </Styled.ShareIcon>
       <Styled.Household>
         <Text>Owner: {household.owner.name}</Text>
-        <View>
-          <Text>Expenses: </Text>
-          <FlatList
-            data={household.expenses}
-            renderItem={({ item: { id, type, cost, householder } }) => (
-              <Text
-                key={id}
-                onPress={() => setSelectedExpenseId(String(id))}
-              >{`${householder.name} spent ${cost} on ${type}`}</Text>
-            )}
-            keyExtractor={({ id }) => id}
-          />
-          <Button color="#4CB944" title="Add Expense" />
-        </View>
+        <ExpenseList expenses={household.expenses} />
+        <Button color="#4CB944" title="Add Expense" />
       </Styled.Household>
       <ShareModal
         isSharing={isSharing}
