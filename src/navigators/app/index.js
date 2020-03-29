@@ -32,7 +32,7 @@ export default createBottomTabNavigator(
   {
     initialRouteName: 'Home',
     defaultNavigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ horizontal, tintColor }) => {
+      tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state
 
         let iconName
@@ -44,20 +44,14 @@ export default createBottomTabNavigator(
           iconName = 'ios-person'
         }
 
-        return (
-          <Ionicons
-            name={iconName}
-            size={horizontal ? 40 : 40}
-            color={tintColor}
-          />
-        )
+        return <Ionicons name={iconName} size={30} color={tintColor} />
       }
     }),
     tabBarOptions: {
       activeTintColor: '#4CB944',
       inactiveTintColor: '#8AEA92',
       showLabel: false,
-      style: { height: 80 }
+      style: { height: 70 }
     }
   }
 )
