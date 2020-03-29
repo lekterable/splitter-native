@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import React from 'react'
-import { Button, Text } from 'react-native'
+import { Text } from 'react-native'
 import auth from '../../utils/auth'
-import { Container, ErrorScreen, LoadingScreen } from '../shared'
+import { Button, Container, ErrorScreen, LoadingScreen } from '../shared'
 
 const ME_QUERY = gql`
   {
@@ -29,7 +29,7 @@ const Profile = ({ navigation }) => {
   return (
     <Container>
       <Text>Hi, {me.name}!</Text>
-      <Button title="Sign Out" onPress={onSignOut} color="#4CB944" />
+      <Button title="Sign Out" onPress={onSignOut} />
     </Container>
   )
 }

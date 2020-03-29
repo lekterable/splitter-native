@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button, Modal, View } from 'react-native'
+import { Modal, View } from 'react-native'
 import QRCode from 'react-native-qrcode-svg'
+import { Button } from '../../shared'
 
 const ExpenseModal = ({ isSharing, onClose, code }) => {
   if (!isSharing) return null
@@ -15,7 +16,7 @@ const ExpenseModal = ({ isSharing, onClose, code }) => {
         }}
       >
         <QRCode value={code} />
-        <Button title="Close" color="#4CB944" onPress={onClose} />
+        <Button title="Close" onPress={onClose} />
       </View>
     </Modal>
   )

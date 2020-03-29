@@ -1,9 +1,8 @@
 import { gql, useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import React from 'react'
-import { Button } from 'react-native'
 import auth from '../../utils/auth'
-import { Container, TextInput } from '../shared'
+import { Button, Container, TextInput } from '../shared'
 
 const LOGIN_USER_QUERY = gql`
   mutation Login($email: String!, $password: String!) {
@@ -46,11 +45,10 @@ const SignIn = ({ navigation }) => {
               onBlur={handleBlur}
               secureTextEntry
             />
-            <Button title="Sign In" onPress={handleSubmit} color="#4CB944" />
+            <Button title="Sign In" onPress={handleSubmit} />
             <Button
               title="Sign Up"
               onPress={() => navigation.navigate('SignUp')}
-              color="#4CB944"
             />
           </Container>
         )}

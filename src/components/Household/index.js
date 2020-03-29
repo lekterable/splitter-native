@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
-import { Button, Text, TouchableOpacity } from 'react-native'
-import { ErrorScreen, LoadingScreen } from '../shared'
+import { Text, TouchableOpacity } from 'react-native'
+import { Button, ErrorScreen, LoadingScreen } from '../shared'
 import ExpenseList from './ExpenseList'
 import ExpenseModal from './ExpenseModal'
 import ShareModal from './ShareModal'
@@ -63,7 +63,7 @@ const Household = ({ navigation }) => {
       <Styled.Household>
         <Text>Owner: {household.owner.name}</Text>
         <ExpenseList expenses={household.expenses} />
-        <Button color="#4CB944" title="Add Expense" />
+        <Button title="Add Expense" />
       </Styled.Household>
       <ShareModal
         isSharing={isSharing}

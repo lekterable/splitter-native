@@ -1,7 +1,7 @@
 import { gql, useQuery } from '@apollo/client'
 import React from 'react'
-import { Button, Modal, Text, View } from 'react-native'
-import { ErrorScreen, LoadingScreen } from '../../shared'
+import { Modal, Text, View } from 'react-native'
+import { Button, ErrorScreen, LoadingScreen } from '../../shared'
 
 const GET_EXPENSE_QUERY = gql`
   query Expense($id: String!) {
@@ -56,7 +56,7 @@ const ExpenseModal = ({ selectedExpenseId, onClose }) => {
           <Text>Cost: {expense.cost}</Text>
           <Text>Householder: {expense.householder.name}</Text>
         </View>
-        <Button title="Close" color="#4CB944" onPress={onClose} />
+        <Button title="Close" onPress={onClose} />
       </View>
     </Modal>
   )
