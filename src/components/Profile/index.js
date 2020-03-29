@@ -1,18 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import React from 'react'
 import { Text } from 'react-native'
+import { ME_QUERY } from '../../queries'
 import auth from '../../utils/auth'
 import { Button, Container, ErrorScreen, LoadingScreen } from '../shared'
-
-const ME_QUERY = gql`
-  {
-    me {
-      id
-      name
-      email
-    }
-  }
-`
 
 const Profile = ({ navigation }) => {
   const { loading, error, data } = useQuery(ME_QUERY)

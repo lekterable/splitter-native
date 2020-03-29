@@ -1,29 +1,10 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import React from 'react'
 import { Text, View } from 'react-native'
+import { GET_EXPENSE_QUERY } from '../../../queries'
 import { ErrorScreen, LoadingScreen, Modal } from '../../shared'
 
-const GET_EXPENSE_QUERY = gql`
-  query Expense($id: String!) {
-    expense(id: $id) {
-      id
-      date
-      description
-      type
-      householder {
-        name
-      }
-      household {
-        name
-      }
-      cost
-    }
-  }
-`
-
-const ExpenseModal = ({ selectedExpenseId, onClose }) => {
-  if (!selectedExpenseId) return null
-
+const ExpenseModal = ({ selectedExpenseId, onClose, ...props }) => {
   const { loading, error, data } = useQuery(GET_EXPENSE_QUERY, {
     variables: { id: selectedExpenseId }
   })
@@ -33,7 +14,7 @@ const ExpenseModal = ({ selectedExpenseId, onClose }) => {
 
   const { expense } = data
   return (
-    <Modal visible={!!selectedExpenseId} onClose={onClose}>
+    <Modal visible={!!selectedExpenseId} onClose={onClose} {...props}>
       <Text>#{expense.id}</Text>
       <View>
         <Text>Details</Text>

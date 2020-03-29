@@ -1,19 +1,12 @@
 import React from 'react'
 import * as Styled from './styled'
 
-const TextInput = ({
-  value,
-  name,
-  placeholder,
-  onChange,
-  onBlur,
-  ...props
-}) => (
+const TextInput = ({ value, placeholder, onChange, onBlur, ...props }) => (
   <Styled.TextInput
     value={value}
     placeholder={placeholder}
-    onChangeText={onChange(name)}
-    onBlur={onBlur(name)}
+    onChangeText={onChange}
+    onBlur={onBlur}
     autoCapitalize="none"
     autoComplete="off"
     {...props}

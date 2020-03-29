@@ -1,14 +1,10 @@
 import styled from 'styled-components/native'
 
-export const Container = styled.View`
-  align-items: center;
-  flex: 1;
-  margin-bottom: 50px;
-`
-
 export const Household = styled.View`
+  justify-content: center;
+  align-items: center;
   margin-top: 100px;
-  flex: 1;
+  margin-bottom: 70px;
 `
 
 export const ShareIcon = styled.View`

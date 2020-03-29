@@ -1,17 +1,9 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import React from 'react'
+import { GET_HOUSEHOLDS_QUERY } from '../../queries'
 import { ErrorScreen, LoadingScreen } from '../shared'
 import HouseholdList from '../shared/HouseholdList'
 import * as Styled from './styled'
-
-const GET_HOUSEHOLDS_QUERY = gql`
-  {
-    households {
-      id
-      name
-    }
-  }
-`
 
 const Home = ({ navigation }) => {
   const { loading, error, data } = useQuery(GET_HOUSEHOLDS_QUERY)

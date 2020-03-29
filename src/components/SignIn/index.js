@@ -1,14 +1,9 @@
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import React from 'react'
+import { LOGIN_USER_QUERY } from '../../queries'
 import auth from '../../utils/auth'
 import { Button, Container, TextInput } from '../shared'
-
-const LOGIN_USER_QUERY = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password)
-  }
-`
 
 const SignIn = ({ navigation }) => {
   const [login, { client }] = useMutation(LOGIN_USER_QUERY)
@@ -31,18 +26,16 @@ const SignIn = ({ navigation }) => {
         {({ values, handleChange, handleBlur, handleSubmit }) => (
           <Container>
             <TextInput
-              name="email"
               value={values.email}
               placeholder="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              onChange={handleChange('email')}
+              onBlur={handleBlur('email')}
             />
             <TextInput
-              name="password"
               value={values.password}
               placeholder="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              onChange={handleChange('password')}
+              onBlur={handleBlur('password')}
               secureTextEntry
             />
             <Button title="Sign In" onPress={handleSubmit} />

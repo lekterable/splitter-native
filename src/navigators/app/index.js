@@ -44,14 +44,14 @@ export default createBottomTabNavigator(
           iconName = 'ios-person'
         }
 
-        return <Ionicons name={iconName} size={30} color={tintColor} />
+        return <Ionicons name={iconName} size={25} color={tintColor} />
       }
     }),
     tabBarOptions: {
       activeTintColor: '#4CB944',
       inactiveTintColor: '#8AEA92',
       showLabel: false,
-      style: { height: 70 }
+      style: { height: 55 }
     }
   }
 )
