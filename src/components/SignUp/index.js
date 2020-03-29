@@ -1,8 +1,9 @@
 import { gql, useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import React from 'react'
-import { Button, TextInput, View } from 'react-native'
+import { Button } from 'react-native'
 import auth from '../../utils/auth'
+import { Container, TextInput } from '../shared'
 
 const REGISTER_USER_QUERY = gql`
   mutation Register($name: String!, $email: String!, $password: String!) {
@@ -23,67 +24,34 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+    <Container>
       <Formik
         initialValues={{ name: '', email: '', password: '' }}
         onSubmit={handleSubmit}
       >
         {({ values, handleChange, handleBlur, handleSubmit }) => (
-          <View
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              flex: 1
-            }}
-          >
+          <Container>
             <TextInput
-              style={{
-                height: 30,
-                borderColor: 'gray',
-                width: 150,
-                borderWidth: 1,
-                textAlign: 'center',
-                borderRadius: 10
-              }}
-              placeholder="name"
-              autoCapitalize="none"
-              autoComplete="off"
-              onChangeText={handleChange('name')}
-              onBlur={handleBlur('name')}
+              name="name"
               value={values.name}
+              placeholder="name"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextInput
-              style={{
-                height: 30,
-                borderColor: 'gray',
-                width: 150,
-                borderWidth: 1,
-                textAlign: 'center',
-                borderRadius: 10
-              }}
-              placeholder="email"
-              autoCapitalize="none"
-              autoComplete="off"
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
+              name="email"
               value={values.email}
+              placeholder="email"
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
             <TextInput
-              style={{
-                height: 30,
-                borderColor: 'gray',
-                width: 150,
-                borderWidth: 1,
-                textAlign: 'center',
-                borderRadius: 10
-              }}
-              placeholder="password"
-              autoCapitalize="none"
-              autoComplete="off"
-              secureTextEntry
-              onChangeText={handleChange('password')}
-              onBlur={handleBlur('password')}
+              name="password"
               value={values.password}
+              placeholder="password"
+              onChange={handleChange}
+              onBlur={handleBlur}
+              secureTextEntry
             />
             <Button title="Sign Up" onPress={handleSubmit} color="#4CB944" />
             <Button
@@ -91,10 +59,10 @@ const SignUp = ({ navigation }) => {
               onPress={() => navigation.navigate('SignIn')}
               color="#4CB944"
             />
-          </View>
+          </Container>
         )}
       </Formik>
-    </View>
+    </Container>
   )
 }
 
