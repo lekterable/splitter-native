@@ -1,40 +1,62 @@
+import { Ionicons } from '@expo/vector-icons'
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text } from 'react-native'
-import { Container } from '../shared'
+import { Text, TouchableOpacity } from 'react-native'
+import { Container, ErrorScreen } from '../shared'
+import QRScanner from './QRScanner'
+import * as Styled from './styled'
 
 const Other = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null)
+  const [isScanning, setIsScanning] = useState(false)
+  const [code, setCode] = useState('')
 
   useEffect(() => {
+    if (!isScanning) return
+
     BarCodeScanner.requestPermissionsAsync().then(({ status }) =>
       setHasPermission(status === 'granted')
     )
-  }, [])
+  }, [isScanning])
 
   const handleBarCodeScanned = ({ data: id }) =>
     navigation.navigate('Household', { id })
+  const handleCodeChange = code => setCode(code && code.toUpperCase())
+  const handleScannerOpen = () => setIsScanning(true)
+  const handleScannerClose = () => setIsScanning(false)
 
-  if (hasPermission === null)
+  if (isScanning && hasPermission === null)
     return (
       <Container>
         <Text>Requested camera permission</Text>
       </Container>
     )
-  if (hasPermission === false)
+  if (isScanning && hasPermission === false)
     return (
       <Container>
-        <Text>No access to camera</Text>
+        <ErrorScreen error="Access to camera denied" />
       </Container>
     )
 
   return (
     <Container>
-      <BarCodeScanner
-        onBarCodeScanned={handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-      />
+      <Styled.Wrapper>
+        <Styled.CodeInput
+          value={code}
+          onChangeText={handleCodeChange}
+          autoCapitalize="none"
+          autoComplete="off"
+          autoCorrect={false}
+          maxLength={6}
+        />
+        <Text>OR</Text>
+        <TouchableOpacity onPress={handleScannerOpen}>
+          <Ionicons name="ios-qr-scanner" size={40} />
+        </TouchableOpacity>
+      </Styled.Wrapper>
+      {isScanning && (
+        <QRScanner onScan={handleBarCodeScanned} onClose={handleScannerClose} />
+      )}
     </Container>
   )
 }
