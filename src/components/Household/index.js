@@ -1,8 +1,11 @@
 import { gql, useQuery } from '@apollo/client'
-import React, { useState } from 'react'
-import { Button, FlatList, Text, View } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
+import React, { useEffect, useState } from 'react'
+import { Button, FlatList, Text, TouchableOpacity, View } from 'react-native'
 import { ErrorScreen, LoadingScreen } from '../shared'
 import ExpenseModal from './ExpenseModal'
+import ShareModal from './ShareModal'
+import * as Styled from './styled'
 
 const GET_HOUSEHOLD_QUERY = gql`
   query Household($id: String!) {
@@ -34,16 +37,29 @@ const Household = ({ navigation }) => {
     variables: { id: navigation.getParam('id') }
   })
   const [selectedExpenseId, setSelectedExpenseId] = useState(null)
+  const [isSharing, setIsSharing] = useState(false)
 
-  const handleClose = () => setSelectedExpenseId(null)
+  useEffect(() => {
+    if (!data) return
+
+    navigation.setParams({ name: data.household.name })
+  }, [data])
+
+  const handleExpenseClose = () => setSelectedExpenseId(null)
+  const handleShareClose = () => setIsSharing(false)
 
   if (loading) return <LoadingScreen />
   if (error) return <ErrorScreen error={error.message} />
 
   const { household } = data
   return (
-    <View style={{ alignItems: 'center', flex: 1, marginBottom: 50 }}>
-      <View style={{ marginTop: 100, flex: 1 }}>
+    <Styled.Container>
+      <Styled.ShareIcon>
+        <TouchableOpacity onPress={() => setIsSharing(true)}>
+          <Ionicons name="ios-link" size={40} />
+        </TouchableOpacity>
+      </Styled.ShareIcon>
+      <Styled.Household>
         <Text>Owner: {household.owner.name}</Text>
         <View>
           <Text>Expenses: </Text>
@@ -59,12 +75,17 @@ const Household = ({ navigation }) => {
           />
           <Button color="#4CB944" title="Add Expense" />
         </View>
-      </View>
+      </Styled.Household>
+      <ShareModal
+        isSharing={isSharing}
+        code={household.id}
+        onClose={handleShareClose}
+      />
       <ExpenseModal
         selectedExpenseId={selectedExpenseId}
-        onClose={handleClose}
+        onClose={handleExpenseClose}
       />
-    </View>
+    </Styled.Container>
   )
 }
 

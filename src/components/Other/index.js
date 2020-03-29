@@ -1,10 +1,10 @@
 import { BarCodeScanner } from 'expo-barcode-scanner'
 import React, { useEffect, useState } from 'react'
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+import { Container } from '../shared'
 
-const Other = () => {
+const Other = ({ navigation }) => {
   const [hasPermission, setHasPermission] = useState(null)
-  const [code, setCode] = useState('')
 
   useEffect(() => {
     BarCodeScanner.requestPermissionsAsync().then(({ status }) =>
@@ -12,36 +12,30 @@ const Other = () => {
     )
   }, [])
 
-  const handleBarCodeScanned = ({ data }) => {
-    setCode(data)
-  }
+  const handleBarCodeScanned = ({ data: id }) =>
+    navigation.navigate('Household', { id })
 
   if (hasPermission === null)
     return (
-      <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+      <Container>
         <Text>Requested camera permission</Text>
-      </View>
+      </Container>
     )
   if (hasPermission === false)
     return (
-      <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
+      <Container>
         <Text>No access to camera</Text>
-      </View>
+      </Container>
     )
 
   return (
-    <View style={{ alignItems: 'center', justifyContent: 'center', flex: 1 }}>
-      {code ? (
-        <Text>{code}</Text>
-      ) : (
-        <BarCodeScanner
-          onBarCodeScanned={handleBarCodeScanned}
-          style={StyleSheet.absoluteFillObject}
-          barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
-        />
-      )}
-      <Button title="witam" onPress={() => setCode('')} />
-    </View>
+    <Container>
+      <BarCodeScanner
+        onBarCodeScanned={handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+        barCodeTypes={[BarCodeScanner.Constants.BarCodeType.qr]}
+      />
+    </Container>
   )
 }
 

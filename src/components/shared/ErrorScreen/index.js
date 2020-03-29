@@ -1,16 +1,11 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { Text } from 'react-native'
+import Container from '../Container'
 
-const ErrorScreen = ({ error }) => (
-  <View
-    style={{
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1
-    }}
-  >
+const ErrorScreen = ({ error = '' }) => (
+  <Container>
     <Text style={{ color: 'red' }}>{`ERROR: ${error}`}</Text>
-  </View>
+  </Container>
 )
 
 export default ErrorScreen

@@ -1,16 +1,11 @@
 import React from 'react'
-import { ActivityIndicator, View } from 'react-native'
+import { ActivityIndicator } from 'react-native'
+import Container from '../Container'
 
 const LoadingScreen = ({ size = 'large' }) => (
-  <View
-    style={{
-      alignItems: 'center',
-      justifyContent: 'center',
-      flex: 1
-    }}
-  >
+  <Container>
     <ActivityIndicator size={size} />
-  </View>
+  </Container>
 )
 
 export default LoadingScreen

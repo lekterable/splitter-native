@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 import React from 'react'
-import { View } from 'react-native'
 import { ErrorScreen, LoadingScreen } from '../shared'
 import HouseholdList from '../shared/HouseholdList'
+import * as Styled from './styled'
 
 const GET_HOUSEHOLDS_QUERY = gql`
   {
@@ -16,17 +16,16 @@ const GET_HOUSEHOLDS_QUERY = gql`
 const Home = ({ navigation }) => {
   const { loading, error, data } = useQuery(GET_HOUSEHOLDS_QUERY)
 
-  const handlePress = (id, name) =>
-    navigation.navigate('Household', { id, name })
+  const handlePress = id => navigation.navigate('Household', { id })
 
   if (loading) return <LoadingScreen />
   if (error) return <ErrorScreen error={error.message} />
 
   const { households } = data
   return (
-    <View style={{ alignItems: 'center', marginTop: 100 }}>
+    <Styled.Container>
       <HouseholdList households={households} onPress={handlePress} />
-    </View>
+    </Styled.Container>
   )
 }
 

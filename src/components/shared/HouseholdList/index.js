@@ -14,7 +14,7 @@ const HouseholdList = ({ households = [], onPress }) => (
             width: 200,
             alignItems: 'center'
           }}
-          onPress={() => onPress(id, name)}
+          onPress={() => onPress(id)}
         >
           <Text style={{ fontSize: 18 }}>{`${index + 1}. ${name} `}</Text>
         </TouchableOpacity>
