@@ -7,11 +7,11 @@ const ExpenseList = ({ expenses, onPress }) => (
     <FlatList
       data={expenses}
       keyExtractor={({ id }) => id}
-      renderItem={({ item: { id, type, cost, householder } }) => (
+      renderItem={({ item: { id, type, cost, member } }) => (
         <Text
           key={id}
           onPress={() => onPress(id)}
-        >{`${householder.name} spent ${cost} on ${type}`}</Text>
+        >{`${member.name} spent ${cost} on ${type}`}</Text>
       )}
     />
   </View>

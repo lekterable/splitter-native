@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Ionicons } from '@expo/vector-icons'
 import React, { useEffect, useState } from 'react'
 import { Text, TouchableOpacity } from 'react-native'
-import { GET_HOUSEHOLD_QUERY } from '../../queries'
+import { GET_GROUP_QUERY } from '../../queries'
 import { Container, ErrorScreen, LoadingScreen } from '../shared'
 import AddExpenseModal from './AddExpenseModal'
 import ExpenseList from './ExpenseList'
@@ -10,10 +10,10 @@ import ExpenseModal from './ExpenseModal'
 import ShareModal from './ShareModal'
 import * as Styled from './styled'
 
-const Household = ({ navigation }) => {
-  const householdId = navigation.getParam('id')
-  const { loading, error, data } = useQuery(GET_HOUSEHOLD_QUERY, {
-    variables: { id: householdId }
+const Group = ({ navigation }) => {
+  const groupId = navigation.getParam('id')
+  const { loading, error, data } = useQuery(GET_GROUP_QUERY, {
+    variables: { id: groupId }
   })
   const [selectedExpenseId, setSelectedExpenseId] = useState(null)
   const [isSharing, setIsSharing] = useState(false)
@@ -22,7 +22,7 @@ const Household = ({ navigation }) => {
   useEffect(() => {
     if (!data) return
 
-    navigation.setParams({ name: data.household.name })
+    navigation.setParams({ name: data.group.name })
   }, [data])
 
   const handleExpensePress = id => setSelectedExpenseId(String(id))
@@ -35,7 +35,7 @@ const Household = ({ navigation }) => {
   if (loading) return <LoadingScreen />
   if (error) return <ErrorScreen error={error.message} />
 
-  const { household } = data
+  const { group } = data
   return (
     <Container>
       <Styled.ShareIcon>
@@ -43,19 +43,16 @@ const Household = ({ navigation }) => {
           <Ionicons name="ios-link" size={30} />
         </TouchableOpacity>
       </Styled.ShareIcon>
-      <Styled.Household>
-        <Text>Owner: {household.owner.name}</Text>
-        <ExpenseList
-          expenses={household.expenses}
-          onPress={handleExpensePress}
-        />
+      <Styled.Group>
+        <Text>Owner: {group.owner.name}</Text>
+        <ExpenseList expenses={group.expenses} onPress={handleExpensePress} />
         <TouchableOpacity onPress={handleAddExpensePress}>
           <Ionicons name="ios-add-circle-outline" size={40} />
         </TouchableOpacity>
-      </Styled.Household>
+      </Styled.Group>
       <ShareModal
         isSharing={isSharing}
-        code={household.id}
+        code={group.id}
         onClose={handleShareClose}
       />
       <ExpenseModal
@@ -63,7 +60,7 @@ const Household = ({ navigation }) => {
         onClose={handleExpenseClose}
       />
       <AddExpenseModal
-        householdId={householdId}
+        groupId={groupId}
         isAdding={isAddingExpense}
         onClose={handleAddExpenseClose}
       />
@@ -71,4 +68,4 @@ const Household = ({ navigation }) => {
   )
 }
 
-export default Household
+export default Group

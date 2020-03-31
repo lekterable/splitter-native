@@ -22,7 +22,7 @@ const ExpenseModal = ({ selectedExpenseId, onClose, ...props }) => {
         {expense.description && <Text>Description: {expense.description}</Text>}
         <Text>Type: {expense.type}</Text>
         <Text>Cost: {expense.cost}</Text>
-        <Text>Householder: {expense.householder.name}</Text>
+        <Text>Member: {expense.member.name}</Text>
       </View>
     </Modal>
   )

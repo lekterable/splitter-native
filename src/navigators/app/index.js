@@ -4,16 +4,16 @@ import {
   createBottomTabNavigator,
   createStackNavigator
 } from 'react-navigation'
+import GroupScreen from '../../components/Group'
 import HomeScreen from '../../components/Home'
-import HouseholdScreen from '../../components/Household'
 import OtherScreen from '../../components/Other'
 import ProfileScreen from '../../components/Profile'
 
 const HomeNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Household: {
-      screen: HouseholdScreen,
+    Group: {
+      screen: GroupScreen,
       navigationOptions: ({ navigation }) => ({
         title: navigation.state.params.name,
         headerTintColor: '#4CB944'

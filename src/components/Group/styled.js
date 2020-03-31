@@ -1,6 +1,6 @@
 import styled from 'styled-components/native'
 
-export const Household = styled.View`
+export const Group = styled.View`
   justify-content: center;
   align-items: center;
   margin-top: 100px;

@@ -1,6 +1,6 @@
 # splitter-native [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-splitter-native is a native mobile app for managing your household's expenses, developed using React Native.
+splitter-native is a native mobile app for managing your group's expenses, developed using React Native.
 
 ## Getting Started
 

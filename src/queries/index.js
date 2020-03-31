@@ -22,9 +22,9 @@ export const REGISTER_USER_QUERY = gql`
   }
 `
 
-export const GET_HOUSEHOLD_QUERY = gql`
-  query Household($id: String!) {
-    household(id: $id) {
+export const GET_GROUP_QUERY = gql`
+  query Group($id: String!) {
+    group(id: $id) {
       id
       owner {
         id
@@ -35,11 +35,11 @@ export const GET_HOUSEHOLD_QUERY = gql`
         id
         cost
         type
-        householder {
+        member {
           name
         }
       }
-      householders {
+      members {
         id
         name
       }
@@ -47,9 +47,9 @@ export const GET_HOUSEHOLD_QUERY = gql`
   }
 `
 
-export const GET_HOUSEHOLDS_QUERY = gql`
-  query Households {
-    households {
+export const GET_GROUPS_QUERY = gql`
+  query Groups {
+    groups {
       id
       name
     }
@@ -63,10 +63,10 @@ export const GET_EXPENSE_QUERY = gql`
       date
       description
       type
-      householder {
+      member {
         name
       }
-      household {
+      group {
         name
       }
       cost
@@ -79,14 +79,14 @@ export const ADD_EXPENSE_QUERY = gql`
     $date: Date!
     $description: String
     $type: ExpenseType!
-    $household: String!
+    $group: String!
     $cost: Int!
   ) {
     addExpense(
       date: $date
       description: $description
       type: $type
-      household: $household
+      group: $group
       cost: $cost
     ) {
       id

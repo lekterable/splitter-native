@@ -20,7 +20,7 @@ const Other = ({ navigation }) => {
   }, [isScanning])
 
   const handleBarCodeScanned = ({ data: id }) =>
-    navigation.navigate('Household', { id })
+    navigation.navigate('Group', { id })
   const handleCodeChange = code => setCode(code && code.toUpperCase())
   const handleScannerOpen = () => setIsScanning(true)
   const handleScannerClose = () => setIsScanning(false)

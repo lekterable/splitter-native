@@ -1,10 +1,10 @@
 import React from 'react'
 import { FlatList, Text, TouchableOpacity, View } from 'react-native'
 
-const HouseholdList = ({ households = [], onPress }) => (
+const GroupList = ({ groups = [], onPress }) => (
   <View>
     <FlatList
-      data={households}
+      data={groups}
       renderItem={({ item: { id, name }, index }) => (
         <TouchableOpacity
           style={{
@@ -24,4 +24,4 @@ const HouseholdList = ({ households = [], onPress }) => (
   </View>
 )
 
-export default HouseholdList
+export default GroupList

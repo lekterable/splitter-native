@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client'
 import { Formik } from 'formik'
 import React from 'react'
-import { ADD_EXPENSE_QUERY, GET_HOUSEHOLD_QUERY } from '../../../queries'
+import { ADD_EXPENSE_QUERY, GET_GROUP_QUERY } from '../../../queries'
 import {
   Button,
   Container,
@@ -18,11 +18,9 @@ const items = [
   { label: 'Other', value: 'OTHER' }
 ]
 
-const AddExpenseModal = ({ isAdding, onClose, householdId, ...props }) => {
+const AddExpenseModal = ({ isAdding, onClose, groupId, ...props }) => {
   const [addExpense] = useMutation(ADD_EXPENSE_QUERY, {
-    refetchQueries: [
-      { query: GET_HOUSEHOLD_QUERY, variables: { id: householdId } }
-    ]
+    refetchQueries: [{ query: GET_GROUP_QUERY, variables: { id: groupId } }]
   })
 
   const handleSubmit = async ({ date, description, type, cost }) => {
@@ -30,7 +28,7 @@ const AddExpenseModal = ({ isAdding, onClose, householdId, ...props }) => {
       date,
       description,
       type,
-      household: householdId,
+      group: groupId,
       cost: Number(cost)
     }
 
